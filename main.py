@@ -43,14 +43,14 @@ agent = Agent(
 
 )
 
+ 
 
+@cl.on_message
+async def main(message :cl.Message):
+    result = Runner.run_sync(
+        agent,
+        input=message.content,
+        run_config=config,
 
-user_input = input("Enter Query: ")
-
-ressult = Runner.run_sync(
-    agent,
-    input=user_input,
-    run_config=config
-)
-
-print(ressult.final_output)
+    )
+    await cl.Message(result.final_output).send()
